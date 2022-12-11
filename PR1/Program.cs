@@ -1,11 +1,11 @@
-﻿using System;
+﻿using System.Net;
 
 namespace PR1
 {
     internal class Program
     {
-        public static readonly double[] X = new[] { 1.22, 1.29, 1.55, 1.71, 2.03, 2.32 };
-        public static readonly double[] Y = new[] { 3.04, 2.77, 2.44, 2.18, 2.14, 1.86 };
+        public static readonly double[] X = new[] { 1.22, 1.29, 1.55, 1.71, 1.9, 2.1 };
+        public static readonly double[] Y = new[] { 3.04, 2.77, 2.44, 2.28, 2.14, 1.9 };
 
         public static readonly double Xz = 1.82;
 
@@ -60,30 +60,20 @@ namespace PR1
                 {
                     if (X.Length - 1 >= i + 2)
                     {
-                        QuadraticInterpolationResult =
-                            Y[i] * ((Xz - X[i + 2]) * (Xz - X[i + 1])) / ((X[i] - X[i + 2]) * (X[i] - X[i + 1])) +
-                            Y[i + 1] * ((Xz - X[i]) * (Xz - X[i + 2])) / ((X[i + 1] - X[i]) * (X[i + 1] - X[i + 2])) +
-                            Y[i + 2] * ((Xz - X[i]) * (Xz - X[i + 1])) / ((X[i + 2] - X[i]) * (X[i + 2] - X[i + 1]));
+                        QuadraticInterpolationResult = Y[i] * ((Xz - X[i + 2]) * (Xz - X[i + 1])) / ((X[i] - X[i + 2]) * (X[i] - X[i + 1])) +
+                                                       Y[i + 1] * ((Xz - X[i]) * (Xz - X[i + 2])) / ((X[i + 1] - X[i]) * (X[i + 1] - X[i + 2])) +
+                                                       Y[i + 2] * ((Xz - X[i]) * (Xz - X[i + 1])) / ((X[i + 2] - X[i]) * (X[i + 2] - X[i + 1]));
 
                         break;
                     }
                     else if (X.Length - 1 == i + 1)
                     {
-                        QuadraticInterpolationResult =
-                            Y[i - 1] * ((Xz - X[i + 1]) * (Xz - X[i])) / ((X[i - 1] - X[i + 1]) * (X[i - 1] - X[i])) +
-                            Y[i] * ((Xz - X[i - 1]) * (Xz - X[i + 1])) / ((X[i] - X[i - 1]) * (X[i] - X[i + 1])) +
-                            Y[i + 1] * ((Xz - X[i - 1]) * (Xz - X[i])) / ((X[i + 1] - X[i - 1]) * (X[i + 1] - X[i]));
+                        QuadraticInterpolationResult = Y[i - 1] * ((Xz - X[i + 1]) * (Xz - X[i])) / ((X[i - 1] - X[i + 1]) * (X[i - 1] - X[i])) +
+                                                       Y[i] * ((Xz - X[i - 1]) * (Xz - X[i + 1])) / ((X[i] - X[i - 1]) * (X[i] - X[i + 1])) +
+                                                       Y[i + 1] * ((Xz - X[i - 1]) * (Xz - X[i])) / ((X[i + 1] - X[i - 1]) * (X[i + 1] - X[i]));
 
                         break;
                     }
-                    //else if(X.Length == i)
-                    //{
-                    //    QuadraticInterpolationResult =
-                    //        Y[i] * ((Xz - X[i + 2]) * (Xz - X[i + 1])) / ((X[i] - X[i + 2]) * (X[i] - X[i + 1])) +
-                    //        Y[i + 1] * ((Xz - X[i]) * (Xz - X[i + 2])) / ((X[i + 1] - X[i]) * (X[i + 1] - X[i + 2])) +
-                    //        Y[i + 2] * ((Xz - X[i]) * (Xz - X[i + 1])) / ((X[i + 2] - X[i]) * (X[i + 2] - X[i + 1]));
-                    //}
-
                 }
             }
 
