@@ -1,4 +1,4 @@
-﻿using System.Net;
+﻿using System.Security.Cryptography.X509Certificates;
 
 namespace PR1
 {
@@ -13,23 +13,28 @@ namespace PR1
         {
             Print();
         }
-        static double LinearInterpolation()
+        //Линейная
+        static double LinearInterpolation(int iter)
         {
-            double LinearInterpolationResult = 0;
+            double LineInterpolationResult = 0;
 
-            for (int i = 0; i < X.Length - 1; i++)
+            for (int i = iter; i <= iter + 1; i++)
             {
-                if (Xz > X[i] && Xz < X[i + 1])
+                double temp = 1;
+                for (int j = iter; j <= iter + 1; j++)
                 {
-                    LinearInterpolationResult = (Xz - X[i + 1]) / (X[i] - X[i + 1]) * Y[i]
-                                                + (Xz - X[i]) / (X[i + 1] - X[i]) * Y[i + 1];
-
-                    break;
+                    if (j != i)
+                    {
+                        temp *= (Xz - X[j]) / (X[i] - X[j]);
+                    }
                 }
+
+                LineInterpolationResult += Y[i] * temp;
             }
 
-            return LinearInterpolationResult;
+            return LineInterpolationResult;
         }
+        //Лагранж
         static double LagrangeInterpolation()
         {
             double LagrangeInterpolationResult = 0;
@@ -50,73 +55,91 @@ namespace PR1
 
             return LagrangeInterpolationResult;
         }
-        static double QuadraticInterpolation()
+        //Квадратичная
+        static double QuadraticInterpolation(int iter)
         {
-            double QuadraticInterpolationResult = 0;
+            double SquareInterpolationResult = 0;
 
+            for (int i = iter; i <= iter + 2; i++)
+            {
+                double temp = 1;
+                for (int j = iter; j <= iter + 2; j++)
+                {
+                    if (j != i)
+                    {
+                        temp *= (Xz - X[j]) / (X[i] - X[j]);
+                    }
+                }
+
+                SquareInterpolationResult += Y[i] * temp;
+            }
+
+            return SquareInterpolationResult;
+        }
+        //Проверка на то, между какими точками будет находится Xz
+        static int CheckIter()
+        {
+            int ResultIter = 0;
             for (int i = 0; i < X.Length; i++)
             {
                 if (Xz > X[i] && Xz < X[i + 1])
                 {
-                    if (X.Length - 1 >= i + 2)
+                    if (i == X.Length - 1)
                     {
-                        QuadraticInterpolationResult = Y[i] * ((Xz - X[i + 2]) * (Xz - X[i + 1])) / ((X[i] - X[i + 2]) * (X[i] - X[i + 1])) +
-                                                       Y[i + 1] * ((Xz - X[i]) * (Xz - X[i + 2])) / ((X[i + 1] - X[i]) * (X[i + 1] - X[i + 2])) +
-                                                       Y[i + 2] * ((Xz - X[i]) * (Xz - X[i + 1])) / ((X[i + 2] - X[i]) * (X[i + 2] - X[i + 1]));
-
-                        break;
+                        ResultIter = i - 2;
                     }
-                    else if (X.Length - 1 == i + 1)
+                    else if (i == X.Length - 2)
                     {
-                        QuadraticInterpolationResult = Y[i - 1] * ((Xz - X[i + 1]) * (Xz - X[i])) / ((X[i - 1] - X[i + 1]) * (X[i - 1] - X[i])) +
-                                                       Y[i] * ((Xz - X[i - 1]) * (Xz - X[i + 1])) / ((X[i] - X[i - 1]) * (X[i] - X[i + 1])) +
-                                                       Y[i + 1] * ((Xz - X[i - 1]) * (Xz - X[i])) / ((X[i + 1] - X[i - 1]) * (X[i + 1] - X[i]));
-
-                        break;
+                        ResultIter = i - 1;
+                    }
+                    else
+                    {
+                        ResultIter = i;
                     }
                 }
             }
 
-            return QuadraticInterpolationResult;
+            return ResultIter;
         }
+
         static void Print()
-        {
-            double tempLinearInterpolation = LinearInterpolation();
-
-            Console.WriteLine("i  X    Y    Xz    Yz");
-            for (int i = 0; i < X.Length && i < Y.Length; i++)
             {
-                if (i is 0)
-                {
-                    if (Xz > X[i] && Xz < X[i + 1])
-                    {
-                        Console.ForegroundColor = ConsoleColor.Green;
-                        Console.WriteLine($"{i} {X[i]} {Y[i]} {Xz}  {Math.Round(tempLinearInterpolation, 5)}");
-                    }
-                    else
-                    {
-                        Console.WriteLine($"{i} {X[i]} {Y[i]} {Xz}");
-                    }
-                }
-                else
-                {
-                    if (Xz > X[i] && Xz < X[i + 1])
-                    {
-                        Console.ForegroundColor = ConsoleColor.Green;
-                        Console.WriteLine($"{i} {X[i]} {Y[i]}\t  {Math.Round(tempLinearInterpolation, 5)}");
-                    }
-                    else
-                    {
-                        Console.WriteLine($"{i} {X[i]} {Y[i]}");
-                        Console.ResetColor();
-                    }
-                }
-            }
+                double tempLinearInterpolation = LinearInterpolation(CheckIter());
 
-            Console.WriteLine("\t");
-            Console.WriteLine($"Линейная интерполяция: {tempLinearInterpolation}");
-            Console.WriteLine($"Интерполяция Лагранжа:  {LagrangeInterpolation()}");
-            Console.WriteLine($"Квадратичная интерполяция: {QuadraticInterpolation()}");
+                Console.WriteLine("i  X    Y    Xz    Yz");
+                for (int i = 0; i < X.Length && i < Y.Length; i++)
+                {
+                    if (i is 0)
+                    {
+                        if (Xz > X[i] && Xz < X[i + 1])
+                        {
+                            Console.ForegroundColor = ConsoleColor.Green;
+                            Console.WriteLine($"{i} {X[i]} {Y[i]} {Xz}  {Math.Round(tempLinearInterpolation, 5)}");
+                        }
+                        else
+                        {
+                            Console.WriteLine($"{i} {X[i]} {Y[i]} {Xz}");
+                        }
+                    }
+                    else
+                    {
+                        if (Xz > X[i] && Xz < X[i + 1])
+                        {
+                            Console.ForegroundColor = ConsoleColor.Green;
+                            Console.WriteLine($"{i} {X[i]} {Y[i]}\t  {Math.Round(tempLinearInterpolation, 5)}");
+                        }
+                        else
+                        {
+                            Console.WriteLine($"{i} {X[i]} {Y[i]}");
+                            Console.ResetColor();
+                        }
+                    }
+                }
+
+                Console.WriteLine("\t");
+                Console.WriteLine($"Линейная интерполяция: {tempLinearInterpolation}");
+                Console.WriteLine($"Интерполяция Лагранжа:  {LagrangeInterpolation()}");
+                Console.WriteLine($"Квадратичная интерполяция: {QuadraticInterpolation(CheckIter())}");
+            }
         }
     }
-}

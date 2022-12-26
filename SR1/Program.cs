@@ -2,12 +2,17 @@
 {
     internal class Program
     {
-        public static readonly double[] X = new[] { 0.6145, 0.6158, 0.6167, 0.6185, 0.62 };
-        public static readonly double[] Y = new[] { 1.8272, 1.8242, 1.8221, 1.81791, 1.8145 };
+        //public static readonly double[] X = new[] { 0.6145, 0.6158, 0.6167, 0.6185, 0.62 };
+        //public static readonly double[] Y = new[] { 1.8272, 1.8242, 1.8221, 1.81791, 1.8145 };
 
         private static Dictionary<string, double> P = new();
 
-        public static readonly double Xz = 0.6163;
+        //public static readonly double Xz = 0.6163;
+
+        public static readonly double[] X = new[] { 0.8940, 0, 8944, 0.8955, 0.8965, 0.8975 };
+        public static readonly double[] Y = new[] { 1.24475, 1.24577, 1.24858, 1.25114, 1.25371 };
+
+        public static readonly double Xz = 0.8948;
         public static double Yz;
 
         static void Main(string[] args)
