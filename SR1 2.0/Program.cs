@@ -5,11 +5,11 @@ namespace SR1_2._0
 
     internal class Program
     {
-        public static readonly double[] X = new[] { 0.6145, 0.6158, 0.6167, 0.6185, 0.62 };
-        public static readonly double[] Y = new[] { 1.8272, 1.8242, 1.8221, 1.81791, 1.8145 };
+        public static readonly double[] X = new[] { 0.206, 0.2065, 0.2069, 0.2075, 0.2085 };
+        public static readonly double[] Y = new[] { 0.208964, 0.209486, 0.209904, 0.21053, 0.211575 };
 
         private static List<double> P = new();
-        public static readonly double Xz = 0.6163;
+        public static readonly double Xz = 0.2072;
 
         private static void EulerMethodStep(int Step = 1, int IndexPolinom = 0)
         {

@@ -4,10 +4,10 @@ namespace PR1
 {
     internal class Program
     {
-        public static readonly double[] X = new[] { 1.22, 1.29, 1.55, 1.71, 1.9, 2.1 };
-        public static readonly double[] Y = new[] { 3.04, 2.77, 2.44, 2.28, 2.14, 1.9 };
+        public static readonly double[] X = new[] { 1.21, 1.29, 1.45, 1.61, 1.92, 2.22 };
+        public static readonly double[] Y = new[] { 3.94, 4.11, 4.18, 4.23, 4.48, 4.53 };
 
-        public static readonly double Xz = 1.82;
+        public static readonly double Xz = 1.35;
 
         static void Main(string[] args)
         {

@@ -4,9 +4,9 @@ namespace PR2
 {
     internal class Program
     {
-        public static readonly double[] X = new[] { 1.22, 1.29, 1.55, 1.71, 2.04 };
+        public static readonly double[] X = new[] { 1.21, 1.29, 1.45, 1.61, 1.92, 2.22 };
         public static double[] XSquare = new double[X.Length];
-        public static readonly double[] Y = new[] { 3.04, 2.77, 2.55, 2.38, 1.96 };
+        public static readonly double[] Y = new[] { 3.94, 4.11, 4.18, 4.23, 4.48, 4.53 };
         public static double[] XMultiplyByY = new double[X.Length];
 
         private static void XSquareAndXYMultiply()

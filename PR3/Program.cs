@@ -9,13 +9,13 @@
 
             double[,] a = new double[SizeSystem, SizeSystem]
             {
-                {14.45, 1.445, -3.6125, 4.335}, 
-                {1.07, 5.35, 1.8725, -0.535},
-                {-5.13, 1.71, 17.1, 6.84},
-                {2.0875, -2.5050, 1.2525, 8.35}
+                {18.1, 1.81, -4.525, 5.43}, 
+                {1.06, 5.3, 1.855, -0.53},
+                {-4.2750, 1.425, 14.25, 5.7},
+                {4.35, -5.22, 2.61, 17.4}
             };
 
-            double[] b = new double[SizeSystem] {16.30, 5.705, -2.445, 21.19};
+            double[] b = new double[SizeSystem] {9.45, 3.308, -1.418, 12.29};
             double[] x = new double[SizeSystem];
 
             Console.WriteLine($"Система размером {SizeSystem}x{SizeSystem}\n");
